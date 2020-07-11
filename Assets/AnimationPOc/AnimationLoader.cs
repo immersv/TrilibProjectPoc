@@ -22,13 +22,20 @@ public class AnimationLoader : MonoBehaviour
              Debug.Log(anim_clip.name);
          }*/
         //gameObject.AddComponent<Animation>();
-        Animation anim= AssetDatabase.LoadAssetAtPath("Assets/Spider.fbx", typeof(Animation)) as Animation;
-        var clips =Resources.FindObjectsOfTypeAll<AnimationClip>();
+        /*GameObject anim= AssetDatabase.LoadAssetAtPath("Assets/Spider.fbx", typeof(GameObject)) as GameObject;
+        AnimationClip[] clips = AnimationUtility.GetAnimationClips(anim);
+        // var clips =Resources.FindObjectsOfTypeAll<AnimationClip>();
         foreach (var c in clips)
         {
             Debug.Log(c.name);
         }
-
+        */
+        ModelImporter MI = (ModelImporter)Instantiate(AssetImporter.GetAtPath("Assets/Spider.fbx"));
+        ModelImporterClipAnimation[] clips = MI.defaultClipAnimations;
+        foreach (var c in clips)
+        {
+            Debug.Log(c.name);
+        }
     }
 }
 
