@@ -30,7 +30,15 @@ public class AnimationLoader : MonoBehaviour
             Debug.Log(c.name);
         }
         */
-        ModelImporter MI = (ModelImporter)Instantiate(AssetImporter.GetAtPath("Assets/Spider.fbx"));
+       /* var modelImporter = assetImporter as ModelImporter;
+        if (modelImporter == null)
+        {
+            Debug.LogError("Error during import of models: ModelImporter is null");
+            return;
+        }*/
+        ModelImporter MI = (ModelImporter)AssetImporter.GetAtPath("Assets/Spider.fbx");
+        var skinObj = AssetDatabase.LoadAssetAtPath<Object>(MI.assetPath);
+        var prefabInstance = (GameObject)GameObject.Instantiate(skinObj);
         ModelImporterClipAnimation[] clips = MI.defaultClipAnimations;
         foreach (var c in clips)
         {
