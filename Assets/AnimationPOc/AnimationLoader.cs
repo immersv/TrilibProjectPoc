@@ -40,24 +40,25 @@ public class AnimationLoader : MonoBehaviour
         ModelImporter MI = (ModelImporter)AssetImporter.GetAtPath("Assets/Spider.fbx");
         var skinObj = AssetDatabase.LoadAssetAtPath<Object>(MI.assetPath);
         var prefabInstance = (GameObject)GameObject.Instantiate(skinObj);
-        if (prefabInstance == null)
-        {
+         if (prefabInstance == null)
+            {
             Debug.LogError("Failed to initialize prefab " + skinObj);
             return;
-        }
+            }
         else
-        {
-            //anim= prefabInstance.AddComponent<Animation>();
+            {
+           // anim= prefabInstance.AddComponent<Animation>();
+            anim = prefabInstance.GetComponent<Animation>();
         }
         ModelImporterClipAnimation[] clips = MI.defaultClipAnimations;
         foreach (ModelImporterClipAnimation c in clips)
         {
-            Debug.Log(c.name);
-            c.loopTime = true;
+           // Debug.Log(c.name);
+            //c.loopTime = true;
                       
         }
-        MI.clipAnimations = clips;
-        AssetDatabase.ImportAsset(MI.assetPath);
+       // MI.clipAnimations = clips;
+       // AssetDatabase.ImportAsset(MI.assetPath);
 
         // or get animation Clip
         Object[] objects = AssetDatabase.LoadAllAssetsAtPath(MI.assetPath);
@@ -66,8 +67,13 @@ public class AnimationLoader : MonoBehaviour
             AnimationClip clip = obj as AnimationClip;
             if (clip != null)
             {
-                anim.AddClip(clip,obj.name);
+                  
+                    anim.AddClip(clip, obj.name);
+               
             }
+                
+                
+            
         }
     }
 }
