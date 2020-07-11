@@ -9,6 +9,7 @@ public class AnimationLoader : MonoBehaviour
     // Start is called before the first frame update
 
     Animation anim;
+    public string url;
     private void Awake()
     {
       
@@ -16,7 +17,7 @@ public class AnimationLoader : MonoBehaviour
     }
     void Start()
     {
-        ModelImporter MI = (ModelImporter)AssetImporter.GetAtPath("Assets/Spider.fbx");
+        ModelImporter MI = (ModelImporter)AssetImporter.GetAtPath(url);
         var skinObj = AssetDatabase.LoadAssetAtPath<Object>(MI.assetPath);
         var prefabInstance = (GameObject)GameObject.Instantiate(skinObj);
          if (prefabInstance == null)
