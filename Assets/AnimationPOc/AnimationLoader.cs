@@ -16,27 +16,6 @@ public class AnimationLoader : MonoBehaviour
     }
     void Start()
     {
-        /* ModelImporter model_imp = AssetImporter.GetAtPath("Assets/Spider.fbx") as ModelImporter;
-         foreach (var anim_clip in model_imp.clipAnimations)
-         {
-             Debug.Log(anim_clip.name);
-         }*/
-        //gameObject.AddComponent<Animation>();
-        /*GameObject anim= AssetDatabase.LoadAssetAtPath("Assets/Spider.fbx", typeof(GameObject)) as GameObject;
-        AnimationClip[] clips = AnimationUtility.GetAnimationClips(anim);
-        // var clips =Resources.FindObjectsOfTypeAll<AnimationClip>();
-        foreach (var c in clips)
-        {
-            Debug.Log(c.name);
-        }
-        */
-       /* var modelImporter = assetImporter as ModelImporter;
-        if (modelImporter == null)
-        {
-            Debug.LogError("Error during import of models: ModelImporter is null");
-            return;
-        }*/
-
         ModelImporter MI = (ModelImporter)AssetImporter.GetAtPath("Assets/Spider.fbx");
         var skinObj = AssetDatabase.LoadAssetAtPath<Object>(MI.assetPath);
         var prefabInstance = (GameObject)GameObject.Instantiate(skinObj);
@@ -47,21 +26,19 @@ public class AnimationLoader : MonoBehaviour
             }
         else
             {
-           // anim= prefabInstance.AddComponent<Animation>();
-            anim = prefabInstance.GetComponent<Animation>();
-        }
-        ModelImporterClipAnimation[] clips = MI.defaultClipAnimations;
-        foreach (ModelImporterClipAnimation c in clips)
-        {
-           // Debug.Log(c.name);
-            //c.loopTime = true;
-                      
-        }
-       // MI.clipAnimations = clips;
-       // AssetDatabase.ImportAsset(MI.assetPath);
+            if (prefabInstance.GetComponent<Animation>())
+            {
+                anim = prefabInstance.GetComponent<Animation>();
+            }
+            else
+            {
+                anim = prefabInstance.AddComponent<Animation>();
+                anim = prefabInstance.GetComponent<Animation>();
 
-        // or get animation Clip
-        Object[] objects = AssetDatabase.LoadAllAssetsAtPath(MI.assetPath);
+            }
+           
+        }
+       Object[] objects = AssetDatabase.LoadAllAssetsAtPath(skinObj.name);
         foreach (Object obj in objects)
         {
             AnimationClip clip = obj as AnimationClip;
