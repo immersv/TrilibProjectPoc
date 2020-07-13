@@ -596,6 +596,9 @@ MonoBehaviour:
   extension: fbx
   _animationsText: {fileID: 354278159}
   _animationsScrollRect: {fileID: 232048273}
+  _containerTransform: {fileID: 174990989}
+  _animationTextPrefab: {fileID: 114163546723786032, guid: 5538d63cb3fe7fd49a757dd661833703,
+    type: 3}
 --- !u!1 &519629777
 GameObject:
   m_ObjectHideFlags: 0
