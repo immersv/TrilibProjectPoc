@@ -7,6 +7,14 @@ public class GetAssetBundle : MonoBehaviour
 {
     AssetBundle bundle;
     public string url;
+    public bool mclearCache = false;
+    private void Awake()
+    {
+        Caching.compressionEnabled = false;
+        if (mclearCache)
+            Caching.ClearCache();
+
+    }
     void Start()
     {
         StartCoroutine(GetAssetbundle(url));
@@ -26,6 +34,7 @@ public class GetAssetBundle : MonoBehaviour
     // public List<GameObject> allchildgameObjects;
 
     public List<Transform> childs;
+
     IEnumerator GetAssetbundle(string uri)
     {
         UnityWebRequest www = UnityWebRequestAssetBundle.GetAssetBundle(uri);
@@ -39,8 +48,8 @@ public class GetAssetBundle : MonoBehaviour
         {
             bundle = DownloadHandlerAssetBundle.GetContent(www);
             Debug.Log("Sucessfull");
-            GameObject gm=Instantiate(bundle.LoadAsset("xlzbctemplate1")) as GameObject;
-             childs = TransformExtension.GetAllChildren(gm.transform,null);
+            GameObject gm = Instantiate(bundle.LoadAsset("xlzbctemplate1")) as GameObject;
+            childs = TransformExtension.GetAllChildren(gm.transform, null);
 
             /* foreach(Transform c in gm.transform)
              {
@@ -65,28 +74,29 @@ public class GetAssetBundle : MonoBehaviour
                               }
                          }*/
 
-        }
-                
-                
-                
-                 
-                
-            
-           
+        } 
         
     }
 }
 public static class TransformExtension
 {
+    public static Component[] components;
     public static List<Transform> GetAllChildren(this Transform parent, List<Transform> transformList = null)
     {
-        if (transformList == null) transformList = new List<Transform>();
+        if (transformList == null)
+            transformList = new List<Transform>();
 
         foreach (Transform child in parent)
         {
             transformList.Add(child);
             child.GetAllChildren(transformList);
-            Debug.Log("Game object Name: "+child.name);
+            Debug.Log("Game object Name: " + child.name);
+            components = child.GetComponents(typeof(Component));
+            foreach (Component component in components)
+            {
+                Debug.Log("Component Names: "+component.ToString());
+            }
+            
         }
         return transformList;
     }

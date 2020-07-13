@@ -151,8 +151,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   url: https://cashmanager.in/poc/AssetBundle/xlzbctemplate1
+  mclearCache: 1
   tempObjects: []
-  allgameObjects: []
+  childs: []
 --- !u!4 &980741837
 Transform:
   m_ObjectHideFlags: 0
