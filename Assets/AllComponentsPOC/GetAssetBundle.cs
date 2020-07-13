@@ -23,6 +23,7 @@ public class GetAssetBundle : MonoBehaviour
     }
     //  public Transform[] allgameObjects;
     public List<GameObject> allgameObjects;
+   // public List<GameObject> allchildgameObjects;
     IEnumerator GetAssetbundle(string uri)
     {
         UnityWebRequest www = UnityWebRequestAssetBundle.GetAssetBundle(uri);
@@ -40,25 +41,30 @@ public class GetAssetBundle : MonoBehaviour
            
             foreach(Transform c in gm.transform)
             {
-                allgameObjects.Add(c.gameObject);
-                Debug.Log("All GameObjectNames " + c.gameObject.name);
-                if (c.gameObject != null)
+                if (c != null)
                 {
-                    foreach (Transform c1 in c.transform)
+                    allgameObjects.Add(c.gameObject);
+                    Debug.Log("All GameObjectNames " + c.gameObject.name);
+                    if (c.gameObject != null)
                     {
-                        allgameObjects.Add(transform.gameObject);
-                        Debug.Log("All Child GameObjectNames " + c1.gameObject.name);
-                       /* if (c1.gameObject != null)
+                        foreach (Transform c1 in c.transform)
                         {
-                            foreach(Transform c2 in c1.transform)
-                            {
-                                allgameObjects.Add(transform.gameObject);
-                                Debug.Log("All Child in child GameObjectNames " + c2.gameObject.name);
-                            }
-                        }*/
-                    }
+                            allgameObjects.Add(c1.gameObject);
+                            Debug.Log("All Child GameObjectNames " + c1.gameObject.name);
+                            if (c1.gameObject != null)
+                             {
+                                 foreach(Transform c2 in c1.transform)
+                                 {
+                                     allgameObjects.Add(c2.gameObject);
+                                     Debug.Log("All Child in child GameObjectNames " + c2.gameObject.name);
+                                 }
+                             }
+                        }
 
+                    }
                 }
+                
+                
                  
                 
             }
