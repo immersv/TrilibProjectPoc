@@ -152,7 +152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   url: https://cashmanager.in/poc/AssetBundle/xlzbctemplate1
   mclearCache: 1
-  tempObjects: []
   childs: []
 --- !u!4 &980741837
 Transform:
