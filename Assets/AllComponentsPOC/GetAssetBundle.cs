@@ -47,9 +47,9 @@ public class GetAssetBundle : MonoBehaviour
         else
         {
             bundle = DownloadHandlerAssetBundle.GetContent(www);
-            Debug.Log("Sucessfull");
+            Debug.Log("Sucessfull Downloaded Asset Bundle");
             GameObject gm = Instantiate(bundle.LoadAsset("xlzbctemplate1")) as GameObject;
-            childs = TransformExtension.GetAllChildren(gm.transform, null);
+            childs = GetAllObjectsAndComponents.GetAllChildren(gm.transform, null);
 
             /* foreach(Transform c in gm.transform)
              {
@@ -78,9 +78,9 @@ public class GetAssetBundle : MonoBehaviour
         
     }
 }
-public static class TransformExtension
+public static class GetAllObjectsAndComponents
 {
-    public static Component[] components;
+    
     public static List<Transform> GetAllChildren(this Transform parent, List<Transform> transformList = null)
     {
         if (transformList == null)
@@ -91,7 +91,7 @@ public static class TransformExtension
             transformList.Add(child);
             child.GetAllChildren(transformList);
             Debug.Log("Game object Name: " + child.name);
-            components = child.GetComponents(typeof(Component));
+            Component[] components = child.GetComponents(typeof(Component));
             foreach (Component component in components)
             {
                 Debug.Log("Component Names: "+component.ToString());
